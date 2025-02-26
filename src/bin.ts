@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { extname } from 'node:path'
 import { parseArgs } from 'node:util'
 
+import pause from 'connect-pause'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import JSON5 from 'json5'
@@ -22,6 +23,7 @@ Options:
   -p, --port <port>  Port (default: 3000)
   -h, --host <host>  Host (default: localhost)
   -s, --static <dir> Static files directory (multiple allowed)
+  -d, --delay <ms>   Add delay to responses (ms)
   --help             Show this message
   --version          Show version number
 `)
@@ -33,6 +35,7 @@ function args(): {
   port: number
   host: string
   static: string[]
+  delay: number
 } {
   try {
     const { values, positionals } = parseArgs({
@@ -46,6 +49,11 @@ function args(): {
           type: 'string',
           short: 'h',
           default: process.env['HOST'] ?? 'localhost',
+        },
+        delay: {
+          type: 'string',
+          short: 'd',
+          default: process.env['DELAY'] ?? '0',
         },
         static: {
           type: 'string',
@@ -99,6 +107,7 @@ function args(): {
       file: positionals[0] ?? '',
       port: parseInt(values.port as string),
       host: values.host as string,
+      delay: parseInt(values.delay as string),
       static: values.static as string[],
     }
   } catch (e) {
@@ -112,7 +121,7 @@ function args(): {
   }
 }
 
-const { file, port, host, static: staticArr } = args()
+const { file, port, delay, host, static: staticArr } = args()
 
 if (!existsSync(file)) {
   console.log(chalk.red(`File ${file} not found`))
@@ -165,6 +174,8 @@ function randomItem(items: string[]): string {
   const index = Math.floor(Math.random() * items.length)
   return items.at(index) ?? ''
 }
+
+app.use(pause(delay))
 
 app.listen(port, () => {
   console.log(
