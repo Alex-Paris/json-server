@@ -3,7 +3,6 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { extname } from 'node:path'
 import { parseArgs } from 'node:util'
 
-import pause from 'connect-pause'
 import chalk from 'chalk'
 import { watch } from 'chokidar'
 import JSON5 from 'json5'
@@ -175,7 +174,14 @@ function randomItem(items: string[]): string {
   return items.at(index) ?? ''
 }
 
-app.use(pause(delay))
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+app.use(async (req, res, next) => {
+  await sleep(delay);
+  next();
+});
 
 app.listen(port, () => {
   console.log(
