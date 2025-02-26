@@ -1,6 +1,6 @@
 {
   "name": "@paristech/json-server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "",
   "type": "module",
   "private": false,
