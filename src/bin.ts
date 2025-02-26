@@ -14,7 +14,6 @@ import { fileURLToPath } from 'node:url'
 import { createApp } from './app.js'
 import { Observer } from './observer.js'
 import { Data } from './service.js'
-import { NextFunction } from '@tinyhttp/app'
 
 function help() {
   console.log(`Usage: json-server [options] <file>
@@ -179,9 +178,8 @@ function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-app.use(async (_req, _res, next: NextFunction) => {
-  await sleep(delay);
-  next();
+app.use(async () => {
+  return await sleep(delay);
 });
 
 app.listen(port, () => {
