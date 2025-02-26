@@ -174,11 +174,11 @@ function randomItem(items: string[]): string {
   return items.at(index) ?? ''
 }
 
-function sleep(ms) {
+function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-app.use(async (req, res, next) => {
+app.use(async (_req, _res, next) => {
   await sleep(delay);
   next();
 });
