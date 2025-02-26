@@ -24,10 +24,6 @@
   "keywords": [],
   "author": "Alex-Paris <me@alexparis.dev>",
   "license": "SEE LICENSE IN ./LICENSE",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/typicode/json-server.git"
-  },
   "devDependencies": {
     "@eslint/js": "^9.11.0",
     "@sindresorhus/tsconfig": "^6.0.0",
