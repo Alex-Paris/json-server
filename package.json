@@ -1,6 +1,6 @@
 {
   "name": "@paristech/json-server",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "type": "module",
   "private": false,
@@ -17,28 +17,13 @@
   },
   "scripts": {
     "dev": "tsx watch src/bin.ts fixtures/db.json",
-    "build": "rm -rf lib && tsc",
-    "test": "node --import tsx/esm --test src/*.test.ts",
-    "lint": "eslint src",
-    "prepublishOnly": "npm run build"
+    "build": "rm -rf lib && tsc"
   },
   "keywords": [],
   "author": "Alex-Paris <me@alexparis.dev>",
   "license": "SEE LICENSE IN ./LICENSE",
-  "devDependencies": {
-    "@eslint/js": "^9.11.0",
-    "@sindresorhus/tsconfig": "^6.0.0",
-    "@tailwindcss/typography": "^0.5.15",
-    "@types/node": "^22.5.5",
-    "concurrently": "^9.0.1",
-    "eslint": "^9.11.0",
-    "get-port": "^7.1.0",
-    "globals": "^15.9.0",
-    "tempy": "^3.1.0",
-    "tsx": "^4.19.1",
-    "type-fest": "^4.26.1",
-    "typescript": "^5.6.2",
-    "typescript-eslint": "^8.6.0"
+  "repository": {
+    "url": "https://github.com/Alex-Paris/json-server.git"
   },
   "dependencies": {
     "@tinyhttp/app": "^2.4.0",
